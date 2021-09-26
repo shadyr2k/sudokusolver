@@ -30,7 +30,6 @@ public class Main {
             for(int j = 0; j < 9; ++j)
                 input[i][j] = in.split("")[j].isBlank() ? "." : in.split("")[j];
         }
-
         return input;
     }
 

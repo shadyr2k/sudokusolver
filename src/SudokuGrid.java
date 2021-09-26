@@ -8,6 +8,21 @@ class SudokuGrid {
         convertGrid();
     }
 
+    private boolean solve(){
+
+        return false;
+    }
+
+    private boolean puzzleFilled(){
+        for(int row = 0; row < 9; ++row){
+            for(int col = 1; col < 9; ++col){
+                if(intGrid[row][col] == 0)
+                    return true;
+            }
+        }
+        return false;
+    }
+
     private boolean inCol(int col, int n){
         for(int row = 0; row < 9; ++row){
             if(intGrid[row][col] == n)
@@ -15,6 +30,7 @@ class SudokuGrid {
         }
         return false;
     }
+
     private boolean inRow(int row, int n){
         for(int col = 0; col < 9; ++col){
             if(intGrid[row][col] == n)
@@ -22,6 +38,7 @@ class SudokuGrid {
         }
         return false;
     }
+
     private boolean inHouse(int startRow, int startCol, int n){
         for(int row = 0; row < 3; ++row){
             for(int col = 0; col < 3; ++col){
