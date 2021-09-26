@@ -15,8 +15,18 @@ public class Main {
                 {".","8",".",".",".",".",".",".","."},
                 {".","1",".",".",".",".","6",".","3"}};
         //String[][] inputGrid = grabInput();
-        SudokuGrid sudokuGrid = new SudokuGrid(exampleGrid);
-        sudokuGrid.printGrid();
+        int[][] sudokuBoard = SudokuGrid.convertGrid(exampleGrid);
+        SudokuGrid sudokuGrid = new SudokuGrid(sudokuBoard);
+        sudokuGrid.printGrid(true);
+        System.out.println();
+
+        HintHelper helper = new HintHelper(sudokuBoard);
+
+        long start = System.currentTimeMillis();
+        sudokuGrid.solve(sudokuBoard);
+        long end = System.currentTimeMillis();
+        sudokuGrid.printGrid(false);
+        System.out.println("Solved in " + (end - start) + " ms");
     }
 
     private static String[][] grabInput(){
@@ -33,4 +43,7 @@ public class Main {
         return input;
     }
 
+    private void editNum(int[][] board, Coordinate coordinate){
+        //todo
+    }
 }
