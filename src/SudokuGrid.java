@@ -4,7 +4,7 @@ class SudokuGrid {
 
     private int[][] grid;
 
-    public final int HOUSE_LIMIT = 3;
+    public static final int HOUSE_LIMIT = 3;
     public static final int BOARD_LIMIT = 9;
     public static final int NO_VALUE = 0;
 
