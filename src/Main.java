@@ -23,7 +23,7 @@ public class Main {
         HintHelper helper = new HintHelper(sudokuGrid);
 
         Scanner sc = new Scanner(System.in);
-        int input = 0;
+        int input;
         do {
             System.out.println();
             System.out.println("Andromeda's Sudoku Helper - 2021 Edition");
