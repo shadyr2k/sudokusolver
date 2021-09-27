@@ -4,9 +4,9 @@ class SudokuGrid {
 
     private int[][] grid;
 
-    public static final int HOUSE_LIMIT = 3;
-    public static final int BOARD_LIMIT = 9;
-    public static final int NO_VALUE = 0;
+    static final int HOUSE_LIMIT = 3;
+    static final int BOARD_LIMIT = 9;
+    static final int NO_VALUE = 0;
 
     SudokuGrid(int[][] grid){
         this.grid = grid;
@@ -61,7 +61,7 @@ class SudokuGrid {
         return true;
     }
 
-    public boolean isValid(int[][] grid, int row, int col){
+    boolean isValid(int[][] grid, int row, int col){
         return inRow(grid, row) && inCol(grid, col) && inHouse(grid, row, col);
     }
 
@@ -89,10 +89,20 @@ class SudokuGrid {
                 }
                 if(grid[i][j] == 0 && string)
                     System.out.print(".  ");
+                else if(grid[i][j] == -1)
+                    System.out.print("✗  ");
                 else
                     System.out.print(grid[i][j] + "  ");
             }
             System.out.println();
         }
+    }
+
+    void editCell(Coordinate c, int val){
+        grid[c.convertRow(c.getY())][c.convertCol(c.getX())] = val;
+    }
+
+    int[][] getGrid(){
+        return grid;
     }
 }

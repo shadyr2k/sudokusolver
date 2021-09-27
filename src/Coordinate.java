@@ -3,17 +3,25 @@ public class Coordinate {
     private int x;
     private int y;
 
-    public Coordinate(int x, int y){
+    Coordinate(int x, int y){
         this.x = x;
         this.y = y;
     }
 
-    public int getX(){
+    int getX(){
         return x;
     }
 
-    public int getY(){
+    int getY(){
         return y;
+    }
+
+    int convertCol(int x){
+        return x - 1;
+    }
+
+    int convertRow(int y){
+        return SudokuGrid.BOARD_LIMIT - y;
     }
 
     @Override
