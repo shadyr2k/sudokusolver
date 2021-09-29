@@ -23,7 +23,8 @@ class HintHelper {
         if(hiddenSingles.length > 0){
             System.out.println("Hidden single of value " + hiddenSingles[1] +
                     " at " + hiddenSingles[0] +
-                    " - it is the only value in its " + hiddenSingles[2]);
+                    " - it is the only " + hiddenSingles[1] +
+                    " in its " + hiddenSingles[2]);
             return;
         }
 

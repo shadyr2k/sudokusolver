@@ -14,15 +14,24 @@ public class Main {
                 {"6",".",".","5","9",".","8",".","."},
                 {".","8",".",".",".",".",".",".","."},
                 {".","1",".",".",".",".","6",".","3"}};
-        String[][] inputGrid = grabInput();
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Method of input:");
+        System.out.println("1 - Row by row");
+        System.out.println("2 - One liner (empty cells are periods)");
+        System.out.println();
+        int methodInput = sc.nextInt();
+        while(methodInput > 2 || methodInput < 1)
+            methodInput = sc.nextInt();
+        String[][] inputGrid = methodInput == 1 ? grabInput(sc) : grabOneLineInput(sc);
+
         int[][] sudokuBoard = SudokuGrid.convertGrid(inputGrid);
         SudokuGrid sudokuGrid = new SudokuGrid(sudokuBoard);
         sudokuGrid.printGrid(true);
         System.out.println();
 
         HintHelper helper = new HintHelper(sudokuGrid);
-
-        Scanner sc = new Scanner(System.in);
         int input;
         do {
             System.out.println();
@@ -78,8 +87,21 @@ public class Main {
         } while(input < 5);
     }
 
-    private static String[][] grabInput(){
-        Scanner sc = new Scanner(System.in);
+    private static String[][] grabOneLineInput(Scanner sc) {
+        String[][] input = new String[9][9];
+        String in;
+        System.out.print("Input string: ");
+        do {
+            in = sc.nextLine();
+        } while(in.length() != 81);
+        for(int i = 0; i < 9; ++i){
+            for(int j = 0; j < 9; ++j)
+                input[i][j] = in.charAt(i*9 + j) + "";
+        }
+        return input;
+    }
+
+    private static String[][] grabInput(Scanner sc){
         String[][] input = new String[9][9];
         for(int i = 0; i < 9; ++i){
             String in = "";

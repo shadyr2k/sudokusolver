@@ -120,7 +120,21 @@ class SudokuHint {
                     Coordinate coord1 = pointHash.get(key).get(0);
                     Coordinate coord2 = pointHash.get(key).get(1);
                     ArrayList<Coordinate> coordArr = new ArrayList<>(Arrays.asList(coord1, coord2));
-                    if(inSameCol(coordArr) || inSameRow(coordArr)){
+                    int determiner = inSameCol(coordArr) ? 0 : inSameRow(coordArr) ? 1 : -1;
+                    int num1 = sHash.get(coord1).get(0);
+                    int num2 = sHash.get(coord1).get(1);
+                    if(determiner >= 0){
+                        if(determiner == 0){
+                            for(int i = 0; i < SudokuGrid.BOARD_LIMIT; ++i){
+                                if(i == coord1.getY() || i == coord2.getY()) continue;
+                                Coordinate c = new Coordinate(coord1.getX(), i);
+                                if(!getNotes(c).contains(0)){
+                                    if(sHash.get(c).contains(num1) || sHash.get(c).contains(num2))
+                                        break; //todo check
+                                }
+
+                            }
+                        }
                         blacklistedPointingPair.add(coord1);
                         blacklistedPointingPair.add(coord2);
                         printGridWithHighlights(coordArr);
@@ -164,7 +178,7 @@ class SudokuHint {
                     }
                 }
             }
-            System.out.println(hash);
+            //System.out.println(hash);
         }
     }
 
