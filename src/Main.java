@@ -14,8 +14,8 @@ public class Main {
                 {"6",".",".","5","9",".","8",".","."},
                 {".","8",".",".",".",".",".",".","."},
                 {".","1",".",".",".",".","6",".","3"}};
-        //String[][] inputGrid = grabInput();
-        int[][] sudokuBoard = SudokuGrid.convertGrid(exampleGrid);
+        String[][] inputGrid = grabInput();
+        int[][] sudokuBoard = SudokuGrid.convertGrid(inputGrid);
         SudokuGrid sudokuGrid = new SudokuGrid(sudokuBoard);
         sudokuGrid.printGrid(true);
         System.out.println();
