@@ -21,15 +21,14 @@ class HintPointingPair extends HintMethodHelper {
                 if(pointHash.get(key).size() == 2){
                     Coordinate coord1 = pointHash.get(key).get(0);
                     Coordinate coord2 = pointHash.get(key).get(1);
-                    System.out.println(coord1.toString() + " " + coord2.toString());
                     ArrayList<Coordinate> coordArr = new ArrayList<>(Arrays.asList(coord1, coord2));
                     int determiner = inSameCol(coordArr) ? 0 : inSameRow(coordArr) ? 1 : -1;
                     int num = key;
 
                     boolean useful = determiner == 0 ? pointingPairCheckUse(coord1, coord2, false, num) : determiner == 1 && pointingPairCheckUse(coord1, coord2, true, num);
-                    blacklistedPointingPair.add(coord1);
-                    blacklistedPointingPair.add(coord2);
                     if(useful){
+                        blacklistedPointingPair.add(coord1);
+                        blacklistedPointingPair.add(coord2);
                         printGridWithHighlights(coordArr);
                         return new String[]{coord1.toString(), coord2.toString(), key.toString()};
                     }
