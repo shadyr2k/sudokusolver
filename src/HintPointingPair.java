@@ -1,10 +1,11 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 class HintPointingPair extends HintMethodHelper {
 
-    private ArrayList<Coordinate> blacklistedPointingPair = new ArrayList<>();
+    private HashMap<ArrayList<Coordinate>, Integer> blacklistedPointingPair = new HashMap<>();
 
     HintPointingPair(HashMap<Coordinate, ArrayList<Integer>> sHash, int[][] gameGrid) {
         super(sHash, gameGrid);
@@ -16,21 +17,21 @@ class HintPointingPair extends HintMethodHelper {
         int colOffset = 0;
 
         while(colOffset < 9) {
-            checkHouse(pointHash, rowOffset, colOffset, blacklistedPointingPair);
+            checkHouse(pointHash, rowOffset, colOffset, new ArrayList<>());
             for(Integer key : pointHash.keySet()){
                 if(pointHash.get(key).size() == 2){
                     Coordinate coord1 = pointHash.get(key).get(0);
                     Coordinate coord2 = pointHash.get(key).get(1);
                     ArrayList<Coordinate> coordArr = new ArrayList<>(Arrays.asList(coord1, coord2));
-                    int determiner = inSameCol(coordArr) ? 0 : inSameRow(coordArr) ? 1 : -1;
-                    int num = key;
 
-                    boolean useful = determiner == 0 ? pointingPairCheckUse(coord1, coord2, false, num) : determiner == 1 && pointingPairCheckUse(coord1, coord2, true, num);
-                    if(useful){
-                        blacklistedPointingPair.add(coord1);
-                        blacklistedPointingPair.add(coord2);
-                        printGridWithHighlights(coordArr);
-                        return new String[]{coord1.toString(), coord2.toString(), key.toString()};
+                    if(!(blacklistedPointingPair.containsKey(coordArr) && blacklistedPointingPair.get(coordArr).equals(key))){
+                        int determiner = inSameCol(coordArr) ? 0 : inSameRow(coordArr) ? 1 : -1;
+                        boolean useful = determiner == 0 ? pointingPairCheckUse(coord1, coord2, false, key) : determiner == 1 && pointingPairCheckUse(coord1, coord2, true, key);
+                        if(useful){
+                            blacklistedPointingPair.put(coordArr, key);
+                            printGridWithHighlights(coordArr);
+                            return new String[]{coord1.toString(), coord2.toString(), key.toString()};
+                        }
                     }
                 }
             }
