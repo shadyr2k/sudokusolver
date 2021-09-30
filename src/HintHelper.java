@@ -35,6 +35,7 @@ class HintHelper {
                     " and " + pointingPairs[1]);
             return;
         }
+        System.out.println("No Hint Available");
     }
 
     void updateGrid(Coordinate c, int val){
