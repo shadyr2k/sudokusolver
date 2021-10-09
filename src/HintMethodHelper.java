@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 class HintMethodHelper {
 
@@ -36,9 +38,10 @@ class HintMethodHelper {
 
     //checks if coord list are all in same house
     boolean inSameHouse(ArrayList<Coordinate> coords){
+        List<Coordinate> convertedCoords = coords.stream().map(Coordinate::convert).collect(Collectors.toList());
         if(coords.isEmpty()) return false;
-        Coordinate houseStart = new Coordinate(coords.get(0).getX() - coords.get(0).getX()%3, coords.get(0).getY() - coords.get(0).getY()%3);
-        for(Coordinate coord : coords){
+        Coordinate houseStart = new Coordinate(convertedCoords.get(0).getX() - convertedCoords.get(0).getX()%3, convertedCoords.get(0).getY() - convertedCoords.get(0).getY()%3);
+        for(Coordinate coord : convertedCoords){
             Coordinate start = new Coordinate(coord.getX() - coord.getX()%3, coord.getY() - coord.getY()%3);
             if(!start.equals(houseStart))
                 return false;
@@ -49,6 +52,11 @@ class HintMethodHelper {
     //get notes in a cell
     ArrayList<Integer> getNotes(Coordinate c){
         return sHash.get(c);
+    }
+
+    //converts array coordinates to actual coordinates
+    Coordinate convertCoordinate(int row, int col){
+        return new Coordinate(row + 1, SudokuGrid.BOARD_LIMIT - col);
     }
 
     //assigns coordinate to key value in hash
@@ -73,7 +81,7 @@ class HintMethodHelper {
     void checkHouse(HashMap<Integer, ArrayList<Coordinate>> hash, int rowOffset, int colOffset, ArrayList<Coordinate> blacklisted) {
         for(int row = rowOffset; row < rowOffset + SudokuGrid.HOUSE_LIMIT; ++row){
             for(int col = colOffset; col < colOffset + SudokuGrid.HOUSE_LIMIT; ++col){
-                Coordinate c = new Coordinate(row + 1, SudokuGrid.BOARD_LIMIT - col);
+                Coordinate c = convertCoordinate(row, col);
                 getNoteHash(hash, blacklisted, c);
             }
         }

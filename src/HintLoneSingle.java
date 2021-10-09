@@ -13,7 +13,7 @@ class HintLoneSingle extends HintMethodHelper{
     String[] checkLoneSingle(){
         for(int row = 0; row < SudokuGrid.BOARD_LIMIT; ++row){
             for(int col = 0; col < SudokuGrid.BOARD_LIMIT; ++col){
-                Coordinate c = new Coordinate(row + 1, SudokuGrid.BOARD_LIMIT - col);
+                Coordinate c = convertCoordinate(row, col);
                 if(!blacklistedLoneSingle.contains(c)){
                     ArrayList<Integer> noteArr = getNotes(c);
                     if(!noteArr.contains(0)){

@@ -14,6 +14,7 @@ class SudokuHint {
     private HintLoneSingle hintLoneSingle;
     private HintHiddenSingle hintHiddenSingle;
     private HintPointingPair hintPointingPair;
+    private HintLockedCandidate hintLockedCandidate;
 
     SudokuHint(SudokuGrid sgrid){
         this.sgrid = sgrid;
@@ -39,6 +40,7 @@ class SudokuHint {
         hintLoneSingle = new HintLoneSingle(sHash, grid);
         hintHiddenSingle = new HintHiddenSingle(sHash, grid);
         hintPointingPair = new HintPointingPair(sHash, grid);
+        hintLockedCandidate = new HintLockedCandidate(sHash, grid);
     }
 
     String[] checkLoneSingle(){
@@ -52,6 +54,11 @@ class SudokuHint {
     String[] checkPointingPair(){
         return hintPointingPair.checkPointingPair();
     }
+
+    String[] checkLockedCandidate(){
+        return hintLockedCandidate.checkLockedCandidate();
+    }
+
 
     /*
      * print methods

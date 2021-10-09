@@ -14,7 +14,7 @@ class HintHiddenSingle extends HintMethodHelper {
         HashMap<Integer, ArrayList<Coordinate>> hiddenHash = new HashMap<>();
         for(int row = 0; row < SudokuGrid.BOARD_LIMIT; ++row){
             for(int col = 0; col < SudokuGrid.BOARD_LIMIT; ++col){
-                Coordinate c = new Coordinate(row + 1, SudokuGrid.BOARD_LIMIT - col);
+                Coordinate c = convertCoordinate(row, col);
                 getNoteHash(hiddenHash, blacklistedHiddenSingle, c);
             }
             for(Integer key : hiddenHash.keySet()){
@@ -27,7 +27,7 @@ class HintHiddenSingle extends HintMethodHelper {
         }
         for(int col = 0; col < SudokuGrid.BOARD_LIMIT; ++col){
             for(int row = 0; row < SudokuGrid.BOARD_LIMIT; ++row){
-                Coordinate c = new Coordinate(row + 1, SudokuGrid.BOARD_LIMIT - col);
+                Coordinate c = convertCoordinate(row, col);
                 getNoteHash(hiddenHash, blacklistedHiddenSingle, c);
             }
             for(Integer key : hiddenHash.keySet()){

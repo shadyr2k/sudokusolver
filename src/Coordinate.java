@@ -24,6 +24,10 @@ public class Coordinate {
         return SudokuGrid.BOARD_LIMIT - y;
     }
 
+    Coordinate convert(){
+        return new Coordinate(this.getX() - 1, SudokuGrid.BOARD_LIMIT - this.getY());
+    }
+
     @Override
     public String toString(){
         return "(" + x + ", " + y + ")";

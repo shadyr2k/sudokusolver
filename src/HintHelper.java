@@ -28,6 +28,14 @@ class HintHelper {
             return;
         }
 
+        String[] lockedCandidate = hint.checkLockedCandidate();
+        if(lockedCandidate.length > 0){
+            System.out.println("Locked candidate of value " + lockedCandidate[0] +
+                    " - it is the only value in its " + lockedCandidate[2] +
+                    ": " + lockedCandidate[1]);
+            return;
+        }
+
         String[] pointingPairs = hint.checkPointingPair();
         if(pointingPairs.length > 0){
             System.out.println("Pointing pair of value " + pointingPairs[2] +
@@ -35,6 +43,7 @@ class HintHelper {
                     " and " + pointingPairs[1]);
             return;
         }
+
         System.out.println("No Hint Available");
     }
 
